@@ -5,18 +5,17 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IdFindActivity"
-    android:background="#ffffff"
-    >
+    tools:context=".PwFindActivity"
+    android:background="#ffffff">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/pretendard_bold"
-        android:text="아이디 찾기"
+        android:text="비밀번호 찾기"
         android:textColor="#8C9AAB"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,13 +50,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="23dp"
-        android:layout_marginTop="189dp"
+        android:layout_marginTop="10dp"
         android:ems="15"
         android:fontFamily="@font/pretendard_regular"
         android:inputType="textEmailAddress"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
 
 
     <TextView
@@ -78,13 +77,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="23dp"
-        android:layout_marginTop="285dp"
+        android:layout_marginTop="10dp"
         android:ems="15"
         android:fontFamily="@font/pretendard_regular"
         android:inputType="number"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
 
     <ImageButton
         android:id="@+id/imageButton4"

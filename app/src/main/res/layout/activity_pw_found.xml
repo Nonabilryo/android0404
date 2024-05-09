@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IdFindEmailActivity"
+    tools:context=".PwFoundActivity"
     android:background="#ffffff">
 
     <TextView
@@ -15,7 +15,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/pretendard_bold"
-        android:text="아이디 찾기"
+        android:text="비밀번호 찾기"
         android:textColor="#8C9AAB"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/pretendard_regular"
-        android:text="사용중인 아이디"
+        android:text="사용중인 비밀번호"
         android:textColor="#8C9AAB"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,12 +48,12 @@
     <TextView
         android:id="@+id/textView5"
         android:layout_width="353dp"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/id_view"
         android:fontFamily="@font/pretendard_regular"
         android:gravity="center"
-        android:text="1230rbdus"
+        android:text="rbdus1230!"
         android:textAlignment="center"
         android:textColor="#232C36"
         android:textSize="28sp"

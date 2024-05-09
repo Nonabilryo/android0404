@@ -13,14 +13,20 @@
         android:theme="@style/Theme.Nonabilryo"
         tools:targetApi="31">
         <activity
-            android:name=".IdFindEmailActivity"
+            android:name=".PwFoundActivity"
             android:exported="true" />
+        <activity
+            android:name=".PwFindActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IdFindEmailActivity"
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".IdFindActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
