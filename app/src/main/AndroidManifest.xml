@@ -14,11 +14,16 @@
         tools:targetApi="31">
         <activity
 <<<<<<< HEAD
+<<<<<<< Updated upstream
 <<<<<<< HEAD
             android:name=".MainActivity2"
 =======
 =======
 >>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
+=======
+            android:name=".MainActivity2"
+=======
+>>>>>>> Stashed changes
             android:name=".PwFoundActivity"
             android:exported="true" />
         <activity
@@ -26,9 +31,12 @@
             android:exported="false" />
         <activity
             android:name=".IdFindEmailActivity"
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 >>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
 =======
+=======
+>>>>>>> Stashed changes
 >>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
             android:exported="false" />
         <activity
@@ -36,14 +44,20 @@
             android:exported="false" />
         <activity
 <<<<<<< HEAD
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
             android:name=".SignupActivity"
 =======
             android:name=".IdFindActivity"
 >>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
+<<<<<<< Updated upstream
 =======
             android:name=".IdFindActivity"
 >>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
+=======
+>>>>>>> Stashed changes
             android:exported="false" />
         <activity
             android:name=".MainActivity"
