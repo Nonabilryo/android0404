@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/back_icon"
+        android:onClick="onBackButtonClick"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="30dp"
@@ -44,9 +46,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
-            android:text="아이디"
             android:textColor="@color/gray"
-            android:textSize="12dp"/>
+            android:textSize="12dp"
+            android:text="아이디"/>
 
         <EditText
             android:id="@+id/id_edit"
@@ -83,6 +85,7 @@
             android:id="@+id/pw_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:backgroundTint="@color/light_gray"
             app:layout_constraintTop_toBottomOf="@id/pw_tv"
             app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +101,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="50dp"
+        android:foregroundGravity="center">
 
         <TextView
             android:id="@+id/find_id"
@@ -108,7 +112,9 @@
             android:text="아이디 찾기"
             android:textColor="@color/gray"
             android:textSize="12dp"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
             android:id="@+id/find_pw"
@@ -119,18 +125,22 @@
             android:textColor="@color/gray"
             android:textSize="12dp"
             app:layout_constraintStart_toEndOf="@id/find_id"
-            android:layout_marginStart="20dp"/>
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/find_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onSignupButtonClick"
             android:fontFamily="@font/pretendard_medium"
             android:text="회원가입"
             android:textColor="@color/gray"
             android:textSize="12dp"
+            android:background="@android:color/transparent"
             app:layout_constraintStart_toEndOf="@id/find_pw"
-            android:layout_marginStart="20dp"/>
+            android:layout_marginStart="10dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -149,5 +159,6 @@
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         app:layout_constraintBottom_toTopOf="@id/else_layout"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:onClick="onLoginButtonClick"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
