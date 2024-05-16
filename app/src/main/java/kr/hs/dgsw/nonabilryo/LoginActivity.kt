@@ -5,14 +5,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import kr.hs.dgsw.nonabilryo.HomeActivity
-import kr.hs.dgsw.nonabilryo.SignupActivity
-import kr.hs.dgsw.nonabilryo.RetrofitClient
-import kr.hs.dgsw.nonabilryo.LoginResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -52,6 +47,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    // 뒤로가기 버튼 클릭 시 호출될 메서드
     fun onBackButtonClick(view: View) {
         onBackPressed()
     }

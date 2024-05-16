@@ -2,14 +2,10 @@ package kr.hs.dgsw.nonabilryo
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kr.hs.dgsw.nonabilryo.HomeActivity
-import kr.hs.dgsw.nonabilryo.RetrofitClient
-import kr.hs.dgsw.nonabilryo.SignupResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,13 +32,8 @@ class SignupActivity : AppCompatActivity() {
 
         val backBtn: ImageButton = findViewById(R.id.back_btn)
         backBtn.setOnClickListener {
-            // 뒤로 가기 동작
-            onBackPressed()
+            finish()
         }
-    }
-
-    fun onBackButtonClick(view: View) {
-        onBackPressed()
     }
 
     fun onSignupButtonClick(view: android.view.View) {

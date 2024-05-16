@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/back_icon"
-            android:onClick="@{viewModel::onBackButtonClick}"
+            android:onClick="onBackButtonClick"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="30dp"
@@ -322,7 +322,6 @@
             app:layout_constraintTop_toBottomOf="@id/layout_tell_verification"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="80dp"
-            android:onClick="onSignupButtonClick"
-            android:layout_marginTop="30dp"/>
+            android:onClick="onSignupButtonClick"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
