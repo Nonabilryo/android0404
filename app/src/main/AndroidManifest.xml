@@ -15,11 +15,16 @@
         <activity
 <<<<<<< HEAD
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
             android:name=".MainActivity2"
 =======
 =======
 >>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
+=======
+            android:name=".MainActivity2"
+=======
+>>>>>>> Stashed changes
 =======
             android:name=".MainActivity2"
 =======
@@ -32,9 +37,12 @@
         <activity
             android:name=".IdFindEmailActivity"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 >>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 >>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
@@ -45,7 +53,10 @@
         <activity
 <<<<<<< HEAD
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
             android:name=".SignupActivity"
@@ -53,9 +64,12 @@
             android:name=".IdFindActivity"
 >>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
             android:name=".IdFindActivity"
 >>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
             android:exported="false" />
