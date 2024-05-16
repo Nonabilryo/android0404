@@ -13,7 +13,37 @@
         android:theme="@style/Theme.Nonabilryo"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
+<<<<<<< HEAD
+            android:name=".MainActivity2"
+=======
+=======
+>>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
+            android:name=".PwFoundActivity"
+            android:exported="true" />
+        <activity
+            android:name=".PwFindActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IdFindEmailActivity"
+<<<<<<< HEAD
+>>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
+=======
+>>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+<<<<<<< HEAD
+<<<<<<< HEAD
+            android:name=".SignupActivity"
+=======
+            android:name=".IdFindActivity"
+>>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
+=======
+            android:name=".IdFindActivity"
+>>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
             android:exported="false" />
         <activity
             android:name=".MainActivity"
