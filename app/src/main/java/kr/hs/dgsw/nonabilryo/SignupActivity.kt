@@ -49,8 +49,9 @@ class SignupActivity : AppCompatActivity() {
             return
         }
 
+        val signupRequest = SignupRequest(name, id, password, email, tell)
         val retrofitService = RetrofitClient.instance
-        val call = retrofitService.signup(name, id, password, email, tell)
+        val call = retrofitService.signup(signupRequest)
 
         call.enqueue(object : Callback<SignupResponse> {
             override fun onResponse(call: Call<SignupResponse>, response: Response<SignupResponse>) {
