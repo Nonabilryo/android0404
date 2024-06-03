@@ -17,6 +17,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var idEdit: EditText
     private lateinit var pwEdit: EditText
+    private lateinit var sharedPreferencesManager: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +25,7 @@ class LoginActivity : AppCompatActivity() {
 
         idEdit = findViewById(R.id.id_edit)
         pwEdit = findViewById(R.id.pw_edit)
+        sharedPreferencesManager = SharedPreferences(this)
 
         val loginBtn: AppCompatButton = findViewById(R.id.login_btn)
         loginBtn.setOnClickListener {
@@ -58,17 +60,19 @@ class LoginActivity : AppCompatActivity() {
         RetrofitClient.instance.login(loginRequest)
             .enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                    Log.d("aaa", "출력 메시지" + response);
-                    /*if (response.isSuccessful) {
-                        val loginResult = response.body()
-                        if (loginResult != null && loginResult.success) {
+                    if (response.isSuccessful) {
+                        val loginResponse = response.body()
+                        if (loginResponse != null && loginResponse.state == 200) {
+                            showToast("로그인 성공")
+                            sharedPreferencesManager.saveTokens(loginResponse.data.accessToken, loginResponse.data.refreshToken)
+                            Log.d("bbb", "" + sharedPreferencesManager.getAccessToken())
                             navigateToHome()
                         } else {
-                            showToast(loginResult?.message ?: "로그인 실패")
+                            showToast(loginResponse?.message ?: "로그인 실패")
                         }
                     } else {
                         showToast("서버 오류")
-                    }*/
+                    }
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
@@ -80,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
     private fun navigateToHome() {
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
-        finish() // 현재 LoginActivity 종료
+        finish() // LoginActivity 종료
     }
 
     private fun showToast(message: String) {
