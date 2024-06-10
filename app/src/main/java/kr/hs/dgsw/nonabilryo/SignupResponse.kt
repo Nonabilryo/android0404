@@ -1,6 +1,8 @@
 package kr.hs.dgsw.nonabilryo
 
+import com.google.gson.annotations.SerializedName
+
 data class SignupResponse(
-    val success: Boolean,
-    val errorMessage: String? = null
+    @SerializedName("state") val state: Int,
+    @SerializedName("message") val message: String
 )

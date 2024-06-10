@@ -5,7 +5,6 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
-import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
@@ -14,16 +13,25 @@ import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
 interface RetrofitService {
-    @FormUrlEncoded
-    @POST("sso/sign-up") // 회원가입 API 엔드포인트
+    @POST("sso/sign-up") // 회원가입 API
     fun signup(
         @Body signupRequest: SignupRequest
     ): Call<SignupResponse>
 
-    @POST("sso/login") // 로그인 API 엔드포인트
+    @POST("sso/login") // 로그인 API
     fun login(
         @Body loginRequest: LoginRequest
     ): Call<LoginResponse>
+
+    @POST("sso/verify-email") // 이메일 인증 API
+    fun verifyEmail(
+        @Body emailVerificationRequest: EmailVerificationRequest
+    ): Call<VerificationResponse>
+
+    @POST("sso/verify-phone") // 전화번호 인증 API
+    fun verifyPhone(
+        @Body phoneVerificationRequest: PhoneVerificationRequest
+    ): Call<VerificationResponse>
 }
 
 object RetrofitClient {
@@ -32,11 +40,11 @@ object RetrofitClient {
     private val okHttpClient: OkHttpClient by lazy {
         val trustAllCertificates = arrayOf<TrustManager>(object : X509TrustManager {
             override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-                // No implementation needed
+                //
             }
 
             override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-                // No implementation needed
+                //
             }
 
             override fun getAcceptedIssuers(): Array<X509Certificate> {
