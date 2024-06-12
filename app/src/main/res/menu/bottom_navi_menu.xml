@@ -6,25 +6,25 @@
         android:enabled="true"
         android:icon="@drawable/home_page_btn"
         android:title="홈"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/comunity"
         android:enabled="true"
         android:icon="@drawable/comunity_page_btn"
         android:title="커뮤니티"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/chating"
         android:enabled="true"
         android:icon="@drawable/chat_page_btn"
         android:title="채팅"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         />
     <item
         android:id="@+id/my"
         android:enabled="true"
         android:icon="@drawable/my_page_btn"
         android:title="마이"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
 
 </menu>
