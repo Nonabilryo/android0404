@@ -13,22 +13,6 @@
         android:theme="@style/Theme.Nonabilryo"
         tools:targetApi="31">
         <activity
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-            android:name=".MainActivity2"
-=======
-=======
->>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
-=======
-            android:name=".MainActivity2"
-=======
->>>>>>> Stashed changes
-=======
-            android:name=".MainActivity2"
-=======
->>>>>>> Stashed changes
             android:name=".PwFoundActivity"
             android:exported="true" />
         <activity
@@ -36,42 +20,15 @@
             android:exported="false" />
         <activity
             android:name=".IdFindEmailActivity"
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
->>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
->>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
             android:name=".SignupActivity"
-=======
+            android:exported="false" />
+        <activity
             android:name=".IdFindActivity"
->>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-            android:name=".IdFindActivity"
->>>>>>> b48c4bf3836c9f599e52adcc9c7c86e244e4674e
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -82,6 +39,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".my.MyPageActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
