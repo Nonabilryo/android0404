@@ -2,6 +2,7 @@ package kr.hs.dgsw.nonabilryo
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
@@ -31,7 +32,7 @@ class SignupActivity : AppCompatActivity() {
         pwEdit = findViewById(R.id.pw_edit)
         emailEdit = findViewById(R.id.email_edit)
         tellEdit = findViewById(R.id.tell_edit)
-        addressEdit = findViewById(R.id.address_edit)
+        addressEdit = findViewById(R.id.adress_edit)
         emailVerificationEdit = findViewById(R.id.email_verification_edit)
         tellVerificationEdit = findViewById(R.id.tell_verification_edit)
 
@@ -53,7 +54,13 @@ class SignupActivity : AppCompatActivity() {
         val email = emailEdit.text.toString()
         val tell = tellEdit.text.toString()
         val address = addressEdit.text.toString()
-        val signupRequest = SignupRequest(name, id, password, email, tell, address)
+        val emailVerifyCode = emailVerificationEdit.text.toString()
+        val tellVerifyCode = tellVerificationEdit.text.toString()
+        val signupRequest = SignupRequest(name, id, password, address, email, tell, emailVerifyCode, tellVerifyCode)
+
+        // 로그 출력
+        Log.d("SignupRequest", "Request Data: $signupRequest")
+
         val retrofitService = RetrofitClient.instance
         val call = retrofitService.signup(signupRequest)
 
@@ -67,7 +74,8 @@ class SignupActivity : AppCompatActivity() {
                         showToast(signupResponse?.message ?: "회원가입에 실패했습니다.")
                     }
                 } else {
-                    showToast("서버와의 통신에 실패했습니다.")
+                    showToast("서버와의 통신에 실패했습니다. 상태 코드: ${response.code()}")
+                    Log.e("SignupError", "Error: ${response.errorBody()?.string()}") // 로그
                 }
             }
 

@@ -1,47 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".HomeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/logo_img"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/logo"
-            android:foregroundGravity="center"
-            android:elevation="100dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"/>
-
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:layout_centerInParent="true"/>
+            <ImageView
+                android:id="@+id/logo_img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/logo"
+                android:foregroundGravity="center"
+                android:elevation="100dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"/>
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_navigation_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:background="?android:attr/windowBackground"
-                android:menu="@menu/bottom_nav_menu" />
-        </RelativeLayout>
+            <ImageView
+                android:id="@+id/bell_btn"
+                android:layout_width="25dp"
+                android:layout_height="27dp"
+                android:background="@drawable/ic_bell"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/logo_img"
+                android:layout_marginEnd="20dp"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            <ImageView
+                android:id="@+id/search_btn"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:background="@drawable/ic_search"
+                app:layout_constraintEnd_toStartOf="@id/bell_btn"
+                app:layout_constraintBottom_toBottomOf="@id/bell_btn"
+                android:layout_marginEnd="20dp"/>
+
+            <!-- Other UI elements go here -->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</RelativeLayout>

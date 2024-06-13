@@ -127,7 +127,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/address_layout"
+            android:id="@+id/adress_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/pw_layout"
@@ -137,7 +137,7 @@
             android:layout_marginEnd="25dp">
 
             <TextView
-                android:id="@+id/address_tv"
+                android:id="@+id/adress_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_regular"
@@ -146,12 +146,12 @@
                 android:textSize="12dp"/>
 
             <EditText
-                android:id="@+id/address_edit"
+                android:id="@+id/adress_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:backgroundTint="@color/light_gray"
-                app:layout_constraintTop_toBottomOf="@id/address_tv"
+                app:layout_constraintTop_toBottomOf="@id/adress_tv"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="10dp"/>
@@ -162,7 +162,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/address_layout"
+            app:layout_constraintTop_toBottomOf="@id/adress_layout"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
             android:layout_marginTop="20dp">
