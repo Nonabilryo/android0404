@@ -32,10 +32,16 @@ interface RetrofitService {
     fun verifyPhone(
         @Body phoneVerificationRequest: PhoneVerificationRequest
     ): Call<VerificationResponse>
+
+    @POST("sso/verify-email/code")
+    fun sendEmailVerificationCode(@Body email: EmailRequest): Call<SignupResponse>
+
+    @POST("sso/verify-phone/code")
+    fun sendPhoneVerificationCode(@Body phone: PhoneRequest): Call<SignupResponse>
 }
 
 object RetrofitClient {
-    private const val BASE_URL = "http://10.80.161.250:8080/"
+    private const val BASE_URL = "http://10.80.161.199:8080/"
 
     private val okHttpClient: OkHttpClient by lazy {
         val trustAllCertificates = arrayOf<TrustManager>(object : X509TrustManager {

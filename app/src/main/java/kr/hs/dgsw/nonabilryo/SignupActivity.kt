@@ -2,6 +2,7 @@ package kr.hs.dgsw.nonabilryo
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
@@ -31,13 +32,12 @@ class SignupActivity : AppCompatActivity() {
         pwEdit = findViewById(R.id.pw_edit)
         emailEdit = findViewById(R.id.email_edit)
         tellEdit = findViewById(R.id.tell_edit)
-        addressEdit = findViewById(R.id.address_edit)
+        addressEdit = findViewById(R.id.adress_edit)
         emailVerificationEdit = findViewById(R.id.email_verification_edit)
         tellVerificationEdit = findViewById(R.id.tell_verification_edit)
 
         val backBtn: ImageButton = findViewById(R.id.back_btn)
         backBtn.setOnClickListener {
-            // 뒤로 가기 동작
             onBackPressed()
         }
     }
@@ -53,7 +53,13 @@ class SignupActivity : AppCompatActivity() {
         val email = emailEdit.text.toString()
         val tell = tellEdit.text.toString()
         val address = addressEdit.text.toString()
-        val signupRequest = SignupRequest(name, id, password, email, tell, address)
+        val emailVerifyCode = emailVerificationEdit.text.toString()
+        val tellVerifyCode = tellVerificationEdit.text.toString()
+        val signupRequest = SignupRequest(name, id, password, address, email, tell, emailVerifyCode, tellVerifyCode)
+
+        //로그출력
+        Log.d("SignupRequest", "Request Data: $signupRequest")
+
         val retrofitService = RetrofitClient.instance
         val call = retrofitService.signup(signupRequest)
 
@@ -67,7 +73,8 @@ class SignupActivity : AppCompatActivity() {
                         showToast(signupResponse?.message ?: "회원가입에 실패했습니다.")
                     }
                 } else {
-                    showToast("서버와의 통신에 실패했습니다.")
+                    showToast("서버와의 통신에 실패했습니다. 상태 코드: ${response.code()}")
+                    Log.e("SignupError", "Error: ${response.errorBody()?.string()}")
                 }
             }
 
@@ -79,18 +86,17 @@ class SignupActivity : AppCompatActivity() {
 
     fun onEmailVerifyButtonClick(view: View) {
         val email = emailEdit.text.toString()
-        val emailVerifyCode = emailVerificationEdit.text.toString()
         val retrofitService = RetrofitClient.instance
-        val call = retrofitService.verifyEmail(EmailVerificationRequest(email, emailVerifyCode))
+        val call = retrofitService.sendEmailVerificationCode(EmailRequest(email))
 
-        call.enqueue(object : Callback<VerificationResponse> {
-            override fun onResponse(call: Call<VerificationResponse>, response: Response<VerificationResponse>) {
+        call.enqueue(object : Callback<SignupResponse> {
+            override fun onResponse(call: Call<SignupResponse>, response: Response<SignupResponse>) {
                 if (response.isSuccessful) {
                     val verificationResponse = response.body()
-                    if (verificationResponse != null && verificationResponse.success) {
-                        showToast("이메일 인증 성공")
+                    if (verificationResponse != null && verificationResponse.state == 200) {
+                        showToast("이메일 인증번호 전송 성공")
                     } else {
-                        val errorMessage = verificationResponse?.errorMessage ?: "이메일 인증에 실패했습니다."
+                        val errorMessage = verificationResponse?.message ?: "이메일 인증번호 전송에 실패했습니다."
                         showToast(errorMessage)
                     }
                 } else {
@@ -98,26 +104,25 @@ class SignupActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<VerificationResponse>, t: Throwable) {
+            override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
                 showToast("네트워크 오류: ${t.message}")
             }
         })
     }
 
     fun onTellVerifyButtonClick(view: View) {
-        val phone = tellEdit.text.toString()
-        val tellVerifyCode = tellVerificationEdit.text.toString()
+        val tell = tellEdit.text.toString()
         val retrofitService = RetrofitClient.instance
-        val call = retrofitService.verifyPhone(PhoneVerificationRequest(phone, tellVerifyCode))
+        val call = retrofitService.sendPhoneVerificationCode(PhoneRequest(tell))
 
-        call.enqueue(object : Callback<VerificationResponse> {
-            override fun onResponse(call: Call<VerificationResponse>, response: Response<VerificationResponse>) {
+        call.enqueue(object : Callback<SignupResponse> {
+            override fun onResponse(call: Call<SignupResponse>, response: Response<SignupResponse>) {
                 if (response.isSuccessful) {
                     val verificationResponse = response.body()
-                    if (verificationResponse != null && verificationResponse.success) {
-                        showToast("전화번호 인증 성공")
+                    if (verificationResponse != null && verificationResponse.state == 200) {
+                        showToast("전화번호 인증번호 전송 성공")
                     } else {
-                        val errorMessage = verificationResponse?.errorMessage ?: "전화번호 인증에 실패했습니다."
+                        val errorMessage = verificationResponse?.message ?: "전화번호 인증번호 전송에 실패했습니다."
                         showToast(errorMessage)
                     }
                 } else {
@@ -125,7 +130,7 @@ class SignupActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<VerificationResponse>, t: Throwable) {
+            override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
                 showToast("네트워크 오류: ${t.message}")
             }
         })
