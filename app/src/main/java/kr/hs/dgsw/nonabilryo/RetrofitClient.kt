@@ -23,25 +23,18 @@ interface RetrofitService {
         @Body loginRequest: LoginRequest
     ): Call<LoginResponse>
 
-    @POST("sso/verify-email") // 이메일 인증 API
-    fun verifyEmail(
-        @Body emailVerificationRequest: EmailVerificationRequest
-    ): Call<VerificationResponse>
-
-    @POST("sso/verify-phone") // 전화번호 인증 API
-    fun verifyPhone(
-        @Body phoneVerificationRequest: PhoneVerificationRequest
-    ): Call<VerificationResponse>
-
-    @POST("sso/verify-email/code")
+    @POST("sso/verify/email")
     fun sendEmailVerificationCode(@Body email: EmailRequest): Call<SignupResponse>
 
-    @POST("sso/verify-phone/code")
-    fun sendPhoneVerificationCode(@Body phone: PhoneRequest): Call<SignupResponse>
+    @POST("/sso/verify/tell")
+    fun sendPhoneVerificationCode(@Body tell: PhoneRequest): Call<SignupResponse>
+
+    @POST("/sso/verify/name")
+    fun verifyName(@Body nameRequest: NameRequest): Call<SignupResponse>
 }
 
 object RetrofitClient {
-    private const val BASE_URL = "http://10.80.161.199:8080/"
+    private const val BASE_URL = "http://10.80.161.221:8080/"
 
     private val okHttpClient: OkHttpClient by lazy {
         val trustAllCertificates = arrayOf<TrustManager>(object : X509TrustManager {

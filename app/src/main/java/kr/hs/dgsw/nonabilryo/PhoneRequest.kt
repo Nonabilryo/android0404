@@ -1,3 +1,3 @@
 package kr.hs.dgsw.nonabilryo
 
-data class PhoneRequest(val phone: String)
+data class PhoneRequest(val tell: String)

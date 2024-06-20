@@ -22,6 +22,7 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var addressEdit: EditText
     private lateinit var emailVerificationEdit: EditText
     private lateinit var tellVerificationEdit: EditText
+    private lateinit var sharedPreferencesManager: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +36,7 @@ class SignupActivity : AppCompatActivity() {
         addressEdit = findViewById(R.id.adress_edit)
         emailVerificationEdit = findViewById(R.id.email_verification_edit)
         tellVerificationEdit = findViewById(R.id.tell_verification_edit)
+        sharedPreferencesManager = SharedPreferences(this)
 
         val backBtn: ImageButton = findViewById(R.id.back_btn)
         backBtn.setOnClickListener {
@@ -52,12 +54,22 @@ class SignupActivity : AppCompatActivity() {
         val password = pwEdit.text.toString()
         val email = emailEdit.text.toString()
         val tell = tellEdit.text.toString()
-        val address = addressEdit.text.toString()
+        val address = if (addressEdit.text.toString().isNotEmpty()) addressEdit.text.toString() else null
         val emailVerifyCode = emailVerificationEdit.text.toString()
         val tellVerifyCode = tellVerificationEdit.text.toString()
+
+        if (emailVerifyCode.isEmpty()) {
+            showToast("이메일 인증 코드를 입력해주세요.")
+            return
+        }
+
+        if (tellVerifyCode.isEmpty()) {
+            showToast("전화번호 인증 코드를 입력해주세요.")
+            return
+        }
+
         val signupRequest = SignupRequest(name, id, password, address, email, tell, emailVerifyCode, tellVerifyCode)
 
-        //로그출력
         Log.d("SignupRequest", "Request Data: $signupRequest")
 
         val retrofitService = RetrofitClient.instance
@@ -68,6 +80,9 @@ class SignupActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val signupResponse = response.body()
                     if (signupResponse != null && signupResponse.state == 200) {
+                        showToast("회원가입 성공")
+                        sharedPreferencesManager.saveTokens(signupResponse.data.accessToken, signupResponse.data.refreshToken)
+                        Log.d("Signup", "Access Token: ${sharedPreferencesManager.getAccessToken()}")
                         navigateToHome()
                     } else {
                         showToast(signupResponse?.message ?: "회원가입에 실패했습니다.")
@@ -100,7 +115,8 @@ class SignupActivity : AppCompatActivity() {
                         showToast(errorMessage)
                     }
                 } else {
-                    showToast("서버와의 통신에 실패했습니다.")
+                    showToast("서버와의 통신에 실패했습니다. 상태 코드: ${response.code()}")
+                    Log.e("SignupError", "Error: ${response.errorBody()?.string()}")
                 }
             }
 
@@ -126,7 +142,35 @@ class SignupActivity : AppCompatActivity() {
                         showToast(errorMessage)
                     }
                 } else {
-                    showToast("서버와의 통신에 실패했습니다.")
+                    showToast("서버와의 통신에 실패했습니다. 상태 코드: ${response.code()}")
+                    Log.e("SignupError", "Error: ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
+                showToast("네트워크 오류: ${t.message}")
+            }
+        })
+    }
+
+    fun onNameVerifyButtonClick(view: View) {
+        val name = nameEdit.text.toString()
+        val retrofitService = RetrofitClient.instance
+        val call = retrofitService.verifyName(NameRequest(name))
+
+        call.enqueue(object : Callback<SignupResponse> {
+            override fun onResponse(call: Call<SignupResponse>, response: Response<SignupResponse>) {
+                if (response.isSuccessful) {
+                    val nameVerifyResponse = response.body()
+                    if (nameVerifyResponse != null && nameVerifyResponse.state == 200) {
+                        showToast("이름 중복 확인 성공")
+                    } else {
+                        val errorMessage = nameVerifyResponse?.message ?: "이름 중복 확인에 실패했습니다."
+                        showToast(errorMessage)
+                    }
+                } else {
+                    showToast("서버와의 통신에 실패했습니다. 상태 코드: ${response.code()}")
+                    Log.e("SignupError", "Error: ${response.errorBody()?.string()}")
                 }
             }
 
