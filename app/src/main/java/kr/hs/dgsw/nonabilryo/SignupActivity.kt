@@ -49,6 +49,9 @@ class SignupActivity : AppCompatActivity() {
     }
 
     fun onSignupButtonClick(view: View) {
+
+
+
         val name = nameEdit.text.toString()
         val id = idEdit.text.toString()
         val password = pwEdit.text.toString()
@@ -81,8 +84,6 @@ class SignupActivity : AppCompatActivity() {
                     val signupResponse = response.body()
                     if (signupResponse != null && signupResponse.state == 200) {
                         showToast("회원가입 성공")
-                        sharedPreferencesManager.saveTokens(signupResponse.data.accessToken, signupResponse.data.refreshToken)
-                        Log.d("Signup", "Access Token: ${sharedPreferencesManager.getAccessToken()}")
                         navigateToHome()
                     } else {
                         showToast(signupResponse?.message ?: "회원가입에 실패했습니다.")

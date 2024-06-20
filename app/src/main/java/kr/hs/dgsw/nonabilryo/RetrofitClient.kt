@@ -1,11 +1,13 @@
 package kr.hs.dgsw.nonabilryo
 
+import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
+import java.net.CookieManager
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.SSLContext
@@ -55,6 +57,7 @@ object RetrofitClient {
         sslContext.init(null, trustAllCertificates, java.security.SecureRandom())
 
         OkHttpClient.Builder()
+            .cookieJar(JavaNetCookieJar(CookieManager()))
             .sslSocketFactory(sslContext.socketFactory, trustAllCertificates[0] as X509TrustManager)
             .hostnameVerifier { _, _ -> true }
             .connectTimeout(20, TimeUnit.SECONDS)
