@@ -1,9 +1,8 @@
+package kr.hs.dgsw.nonabilryo
+
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kr.hs.dgsw.nonabilryo.ArticleResponse
-import kr.hs.dgsw.nonabilryo.R
-import kr.hs.dgsw.nonabilryo.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,7 +45,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun checkApiResponse() {
-        val call = RetrofitClient.instance.getArticle("1")
+        val call = RetrofitClient.instance.getArticle("0")
         call.enqueue(object : Callback<ArticleResponse> {
             override fun onResponse(call: Call<ArticleResponse>, response: Response<ArticleResponse>) {
                 if (response.isSuccessful) {
@@ -59,7 +58,7 @@ class HomeActivity : AppCompatActivity() {
                     }
                 } else {
                     // 오류 처리
-                    println("API 호출 실패: ${response.code()}")
+                    println("API 호출 실패: ${response.code()} - ${response.message()}")
                 }
             }
 

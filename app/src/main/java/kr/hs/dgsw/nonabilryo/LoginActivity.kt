@@ -1,6 +1,5 @@
 package kr.hs.dgsw.nonabilryo
 
-import HomeActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log

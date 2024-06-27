@@ -36,22 +36,22 @@ interface RetrofitService {
     @POST("sso/verify/name")
     fun verifyName(@Body nameRequest: NameRequest): Call<SignupResponse>
 
-    @GET("article/{page}")
+    @GET("article/page/{page}")
     fun getArticle(@Path("page") page: String): Call<ArticleResponse>
 
 }
 
 object RetrofitClient {
-    private const val BASE_URL = "http://10.80.161.219:8080/"
+    private const val BASE_URL = "http://10.80.161.243:8080/"
 
     private val okHttpClient: OkHttpClient by lazy {
         val trustAllCertificates = arrayOf<TrustManager>(object : X509TrustManager {
             override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-                //
+                // No-op
             }
 
             override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-                //
+                // No-op
             }
 
             override fun getAcceptedIssuers(): Array<X509Certificate> {
@@ -69,13 +69,19 @@ object RetrofitClient {
             .connectTimeout(20, TimeUnit.SECONDS)
             .readTimeout(20, TimeUnit.SECONDS)
             .writeTimeout(20, TimeUnit.SECONDS)
+            .addInterceptor { chain ->
+                val request = chain.request().newBuilder()
+                    .addHeader("Content-Type", "application/json")
+                    .build()
+                chain.proceed(request)
+            }
             .build()
     }
 
     val instance: RetrofitService by lazy {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .client(okHttpClient) // OkHttpClient 설정 추가
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
