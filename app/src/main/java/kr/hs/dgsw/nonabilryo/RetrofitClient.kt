@@ -39,6 +39,9 @@ interface RetrofitService {
     @GET("article/page/{page}")
     fun getArticle(@Path("page") page: String): Call<ArticleResponse>
 
+    @GET("article/{id}")
+    fun getArticleById(@Path("id") id: String): Call<ArticleDetailResponse>
+
 }
 
 object RetrofitClient {
