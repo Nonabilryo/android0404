@@ -6,7 +6,9 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 import java.net.CookieManager
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
@@ -28,15 +30,19 @@ interface RetrofitService {
     @POST("sso/verify/email")
     fun sendEmailVerificationCode(@Body email: EmailRequest): Call<SignupResponse>
 
-    @POST("/sso/verify/tell")
+    @POST("sso/verify/tell")
     fun sendPhoneVerificationCode(@Body tell: PhoneRequest): Call<SignupResponse>
 
-    @POST("/sso/verify/name")
+    @POST("sso/verify/name")
     fun verifyName(@Body nameRequest: NameRequest): Call<SignupResponse>
+
+    @GET("article/{page}")
+    fun getArticle(@Path("page") page: String): Call<ArticleResponse>
+
 }
 
 object RetrofitClient {
-    private const val BASE_URL = "http://10.80.161.221:8080/"
+    private const val BASE_URL = "http://10.80.161.219:8080/"
 
     private val okHttpClient: OkHttpClient by lazy {
         val trustAllCertificates = arrayOf<TrustManager>(object : X509TrustManager {

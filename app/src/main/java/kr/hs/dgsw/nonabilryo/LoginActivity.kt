@@ -1,5 +1,6 @@
 package kr.hs.dgsw.nonabilryo
 
+import HomeActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -82,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun navigateToHome() {
-        val intent = Intent(this, HomeFragment::class.java)
+        val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish() // LoginActivity 종료
     }
