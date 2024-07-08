@@ -2,6 +2,8 @@ package kr.hs.dgsw.nonabilryo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,6 +41,18 @@ class HomeActivity : AppCompatActivity() {
 
         // Set default fragment or action
         bottomNavigationView.selectedItemId = R.id.navigation_home
+
+        // RecyclerView 설정
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        val itemList = listOf(
+            Item("Title 1", "테스트~", "1000원", R.drawable.logo_img, 10),
+            Item("Title 2", "설명", "1000원", R.drawable.logo_img, 20)
+        )
+
+        val adapter = RecyclerAdapter(itemList)
+        recyclerView.adapter = adapter
 
         // Retrofit 호출
         checkApiResponse()
