@@ -25,7 +25,7 @@ class GoodsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_goods)
 
-        // Initialize views
+
         goodsImageView = findViewById(R.id.goods_img)
         writerTextView = findViewById(R.id.writer)
         goodsTitleTextView = findViewById(R.id.goods_title)
@@ -44,26 +44,21 @@ class GoodsActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_home -> {
-                    // Handle Home navigation
                     true
                 }
                 R.id.navigation_community -> {
-                    // Handle Community navigation
                     true
                 }
                 R.id.navigation_chat -> {
-                    // Handle Chat navigation
                     true
                 }
                 R.id.navigation_my -> {
-                    // Handle My navigation
                     true
                 }
                 else -> false
             }
         }
 
-        // Set default fragment or action
         bottomNavigationView.selectedItemId = R.id.navigation_home
 
         // Retrofit 호출
