@@ -2,16 +2,42 @@ package kr.hs.dgsw.nonabilryo
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class GoodsActivity : AppCompatActivity() {
+    private lateinit var goodsImageView: ImageView
+    private lateinit var writerTextView: TextView
+    private lateinit var goodsTitleTextView: TextView
+    private lateinit var priceTextView: TextView
+    private lateinit var descriptionTextView: TextView
+    private lateinit var categoryTextView: TextView
+    private lateinit var timeTextView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_goods)
+
+        // Initialize views
+        goodsImageView = findViewById(R.id.goods_img)
+        writerTextView = findViewById(R.id.writer)
+        goodsTitleTextView = findViewById(R.id.goods_title)
+        priceTextView = findViewById(R.id.price)
+        descriptionTextView = findViewById(R.id.description)
+        categoryTextView = findViewById(R.id.category)
+        timeTextView = findViewById(R.id.time)
+
+        val backButton: ImageButton = findViewById(R.id.back_btn)
+        backButton.setOnClickListener {
+            finish()
+        }
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation_view)
 
@@ -52,7 +78,8 @@ class GoodsActivity : AppCompatActivity() {
                     val articleDetail = response.body()
                     if (articleDetail != null) {
                         Log.d("API 호출 성공", "응답 내용: $articleDetail")
-                        // articleDetail.data를 이용해 UI를 업데이트합니다.
+                        // Update UI with the data
+                        updateUI(articleDetail.data)
                     } else {
                         Log.d("API 호출 성공", "응답이 비어 있습니다.")
                     }
@@ -68,5 +95,21 @@ class GoodsActivity : AppCompatActivity() {
                 Log.d("API 호출 오류", t.message ?: "알 수 없는 오류")
             }
         })
+    }
+
+    private fun updateUI(articleData: ArticleData) {
+        goodsTitleTextView.text = articleData.title
+        writerTextView.text = articleData.writer
+        priceTextView.text = "${articleData.price}원"
+        descriptionTextView.text = articleData.description
+        categoryTextView.text = articleData.category
+        timeTextView.text = articleData.createdAt
+
+        // Load image using Glide
+        if (articleData.images.isNotEmpty()) {
+            Glide.with(this)
+                .load(articleData.images[0].url)
+                .into(goodsImageView)
+        }
     }
 }

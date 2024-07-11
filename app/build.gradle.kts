@@ -37,12 +37,15 @@ android {
     buildFeatures {
         dataBinding = true
     }
-    viewBinding{
-        enable=true
+    viewBinding {
+        enable = true
     }
 }
 
 dependencies {
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+
     implementation("com.google.android.material:material:1.4.0") //네비게이션 바
 
     implementation("com.google.code.gson:gson:2.9.0")
@@ -55,14 +58,14 @@ dependencies {
     implementation("com.google.firebase:firebase-bom:32.0.0")
     implementation("com.google.android.gms:play-services-auth:20.5.0")
 
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     // ViewModel utilities for Compose
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     // Lifecycles only (without ViewModel or LiveData)
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     // Lifecycle utilities for Compose
-    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
 
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.google.code.gson:gson:2.8.6")
