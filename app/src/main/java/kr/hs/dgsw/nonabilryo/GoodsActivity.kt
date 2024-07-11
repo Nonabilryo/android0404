@@ -11,6 +11,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 
 class GoodsActivity : AppCompatActivity() {
     private lateinit var goodsImageView: ImageView
@@ -106,5 +110,28 @@ class GoodsActivity : AppCompatActivity() {
                 .load(articleData.images[0].url)
                 .into(goodsImageView)
         }
+    }
+
+    private fun getTimeAgo(dateString: String): String {
+        val formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
+        val dateTime = LocalDateTime.parse(dateString, formatter)
+        val now = LocalDateTime.now(ZoneOffset.UTC)
+
+        val years = ChronoUnit.YEARS.between(dateTime, now)
+        if (years > 0) return "$years" + "년 전"
+
+        val months = ChronoUnit.MONTHS.between(dateTime, now)
+        if (months > 0) return "$months" + "달 전"
+
+        val days = ChronoUnit.DAYS.between(dateTime, now)
+        if (days > 0) return "$days" + "일 전"
+
+        val hours = ChronoUnit.HOURS.between(dateTime, now)
+        if (hours > 0) return "$hours" + "시간 전"
+
+        val minutes = ChronoUnit.MINUTES.between(dateTime, now)
+        if (minutes > 0) return "$minutes" + "분 전"
+
+        return "방금 전"
     }
 }
