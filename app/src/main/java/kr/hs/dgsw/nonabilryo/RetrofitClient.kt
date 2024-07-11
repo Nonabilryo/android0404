@@ -45,7 +45,7 @@ interface RetrofitService {
 }
 
 object RetrofitClient {
-    private const val BASE_URL = "http://10.80.161.243:8080/"
+    private const val BASE_URL = "https://3dad-104-28-215-160.ngrok-free.app/"
 
     private val okHttpClient: OkHttpClient by lazy {
         val trustAllCertificates = arrayOf<TrustManager>(object : X509TrustManager {
