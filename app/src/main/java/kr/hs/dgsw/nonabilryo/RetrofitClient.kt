@@ -69,9 +69,9 @@ object RetrofitClient {
             .cookieJar(JavaNetCookieJar(CookieManager()))
             .sslSocketFactory(sslContext.socketFactory, trustAllCertificates[0] as X509TrustManager)
             .hostnameVerifier { _, _ -> true }
-            .connectTimeout(20, TimeUnit.SECONDS)
-            .readTimeout(20, TimeUnit.SECONDS)
-            .writeTimeout(20, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .addInterceptor { chain ->
                 val request = chain.request().newBuilder()
                     .addHeader("Content-Type", "application/json")

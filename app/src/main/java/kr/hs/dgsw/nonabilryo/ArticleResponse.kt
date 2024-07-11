@@ -22,7 +22,7 @@ data class ArticleResponse(
     ) {
         data class Article(
             @SerializedName("title") val title: String,
-            @SerializedName("price") val price: Int,
+            @SerializedName("price") val price: Long,
             @SerializedName("rentalType") val rentalType: String,
             @SerializedName("image") val image: Image,
             @SerializedName("createdAt") val createdAt: String
