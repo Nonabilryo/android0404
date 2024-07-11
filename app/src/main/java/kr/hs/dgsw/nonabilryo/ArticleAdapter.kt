@@ -44,7 +44,7 @@ class ArticleAdapter(
         fun bind(article: ArticleResponse.Data.Article) {
             titleTextView.text = article.title
             priceTextView.text = "${article.price}원"
-            timeTextView.text = getTimeAgo(article.createdAt) // 여기서 변환된 시간을 설정
+            timeTextView.text = getTimeAgo(article.createdAt)
 
             // 예시 이미지 로드 (Glide 사용 권장)
             Glide.with(itemView).load(article.image.url).into(imageView)

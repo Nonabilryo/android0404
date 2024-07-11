@@ -28,19 +28,15 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_home -> {
-                    // Handle Home navigation
                     true
                 }
                 R.id.navigation_community -> {
-                    // Handle Community navigation
                     true
                 }
                 R.id.navigation_chat -> {
-                    // Handle Chat navigation
                     true
                 }
                 R.id.navigation_my -> {
-                    // Handle My navigation
                     true
                 }
                 else -> false
