@@ -11,10 +11,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.LocalDateTime
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 class GoodsActivity : AppCompatActivity() {
     private lateinit var goodsImageView: ImageView
@@ -28,7 +29,6 @@ class GoodsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_goods)
-
 
         goodsImageView = findViewById(R.id.goods_img)
         writerTextView = findViewById(R.id.writer)
@@ -102,9 +102,8 @@ class GoodsActivity : AppCompatActivity() {
         priceTextView.text = "${articleData.price}원"
         descriptionTextView.text = articleData.description
         categoryTextView.text = articleData.category
-        timeTextView.text = articleData.createdAt
+        timeTextView.text = getRelativeTime(articleData.createdAt)
 
-        // Load image using Glide
         if (articleData.images.isNotEmpty()) {
             Glide.with(this)
                 .load(articleData.images[0].url)
@@ -112,26 +111,27 @@ class GoodsActivity : AppCompatActivity() {
         }
     }
 
-    private fun getTimeAgo(dateString: String): String {
-        val formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
-        val dateTime = LocalDateTime.parse(dateString, formatter)
-        val now = LocalDateTime.now(ZoneOffset.UTC)
+    private fun getRelativeTime(createdAt: String): String {
+        val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault())
+        return try {
+            val createdAtDate = formatter.parse(createdAt)
+            val now = Date()
+            val duration = now.time - createdAtDate.time
 
-        val years = ChronoUnit.YEARS.between(dateTime, now)
-        if (years > 0) return "$years" + "년 전"
+            val days = TimeUnit.MILLISECONDS.toDays(duration)
+            val hours = TimeUnit.MILLISECONDS.toHours(duration)
+            val minutes = TimeUnit.MILLISECONDS.toMinutes(duration)
 
-        val months = ChronoUnit.MONTHS.between(dateTime, now)
-        if (months > 0) return "$months" + "달 전"
-
-        val days = ChronoUnit.DAYS.between(dateTime, now)
-        if (days > 0) return "$days" + "일 전"
-
-        val hours = ChronoUnit.HOURS.between(dateTime, now)
-        if (hours > 0) return "$hours" + "시간 전"
-
-        val minutes = ChronoUnit.MINUTES.between(dateTime, now)
-        if (minutes > 0) return "$minutes" + "분 전"
-
-        return "방금 전"
+            when {
+                days > 365 -> "${days / 365}년 전"
+                days > 30 -> "${days / 30}개월 전"
+                days > 0 -> "${days}일 전"
+                hours > 0 -> "${hours}시간 전"
+                minutes > 0 -> "${minutes}분 전"
+                else -> "방금 전"
+            }
+        } catch (e: ParseException) {
+            "날짜 형식 오류"
+        }
     }
 }

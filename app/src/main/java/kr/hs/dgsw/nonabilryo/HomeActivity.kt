@@ -31,30 +31,32 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigation_community -> {
+                    startActivity(Intent(this, CommunityActivity::class.java))
                     true
                 }
                 R.id.navigation_chat -> {
+                    startActivity(Intent(this, ChatActivity::class.java))
                     true
                 }
                 R.id.navigation_my -> {
+                    startActivity(Intent(this, MyActivity::class.java))
                     true
                 }
                 else -> false
             }
         }
 
-        // Set default fragment or action
         bottomNavigationView.selectedItemId = R.id.navigation_home
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = ArticleAdapter(listOf()) { article ->
             val intent = Intent(this, GoodsActivity::class.java)
-            intent.putExtra("ARTICLE_TITLE", article.title)  // ARTICLE_TITLE로 제목을 전달
-            intent.putExtra("ARTICLE_PRICE", article.price)  // ARTICLE_PRICE로 가격을 전달
-            intent.putExtra("ARTICLE_RENTAL_TYPE", article.rentalType)  // ARTICLE_RENTAL_TYPE로 대여 유형을 전달
-            intent.putExtra("ARTICLE_IMAGE_URL", article.image.url)  // ARTICLE_IMAGE_URL로 이미지 URL을 전달
-            intent.putExtra("ARTICLE_CREATED_AT", article.createdAt)  // ARTICLE_CREATED_AT로 생성 날짜를 전달
+            intent.putExtra("ARTICLE_TITLE", article.title)
+            intent.putExtra("ARTICLE_PRICE", article.price)
+            intent.putExtra("ARTICLE_RENTAL_TYPE", article.rentalType)
+            intent.putExtra("ARTICLE_IMAGE_URL", article.image.url)
+            intent.putExtra("ARTICLE_CREATED_AT", article.createdAt)
             startActivity(intent)
         }
         recyclerView.adapter = adapter
