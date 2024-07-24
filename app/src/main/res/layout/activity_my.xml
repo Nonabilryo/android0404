@@ -1,96 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:backgroundTint="#FFFFFF"
     tools:context=".MyActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/top_title"
-        android:layout_width="match_parent"
+
+    <ImageView
+        android:id="@+id/logo_img"
+        android:layout_width="36dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="37dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <ImageButton
+        android:id="@+id/btn_heart"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="5dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/btn_bell"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_heart"
+        app:tint="#000000" />
+
+    <ImageButton
+        android:id="@+id/btn_bell"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_bell"
+        app:tint="#000000" />
+
+    <ImageView
+        android:id="@+id/profile"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/profile_icon" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="가인님"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile" />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_bold"
-            android:text="마이페이지"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_follower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="18dp"
+        android:text="followers 0"
+        android:textColor="#A3A0A0"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
-    <ScrollView
+    <TextView
+        android:id="@+id/tv_following"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="18dp"
+        android:text="following 0"
+        android:textColor="#A3A0A0"
+        android:textSize="17sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_follower"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+    <GridView
+        android:id="@+id/List_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/top_title"
-        android:layout_above="@id/bottom_navigation_view">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/my_page"
-                android:layout_width="200dp"
-                android:layout_height="160dp"
-                android:background="@drawable/my_img"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="50dp"/>
-
-            <ImageView
-                android:id="@+id/my_goods_img1"
-                android:layout_width="180dp"
-                android:layout_height="220dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/my_goods_img"
-                app:layout_constraintEnd_toStartOf="@id/my_goods_img2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/my_page" />
-
-            <ImageView
-                android:id="@+id/my_goods_img2"
-                android:layout_width="180dp"
-                android:layout_height="220dp"
-                android:background="@drawable/my_goods_img"
-                app:layout_constraintStart_toEndOf="@id/my_goods_img1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/my_goods_img1"
-                android:layout_marginEnd="30dp"/>
-
-            <ImageView
-                android:id="@+id/my_goods_img3"
-                android:layout_width="180dp"
-                android:layout_height="220dp"
-                android:background="@drawable/my_goods_img"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/my_goods_img2"
-                app:layout_constraintTop_toBottomOf="@id/my_goods_img1"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"/>
-
-            <ImageView
-                android:id="@+id/my_goods_img4"
-                android:layout_width="180dp"
-                android:layout_height="220dp"
-                android:background="@drawable/my_goods_img"
-                app:layout_constraintStart_toEndOf="@id/my_goods_img1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/my_goods_img3"
-                android:layout_marginEnd="30dp"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+        android:layout_height="450dp"
+        android:numColumns="2"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_view"
@@ -99,5 +106,32 @@
         android:layout_alignParentBottom="true"
         app:itemIconTint="@drawable/menu_color"
         app:itemTextColor="@drawable/menu_color"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_nav_menu" />
-</RelativeLayout>
+
+
+    <ImageButton
+        android:id="@+id/btn_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-43dp"
+        android:layout_marginTop="-35dp"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintStart_toEndOf="@+id/profile"
+        app:layout_constraintTop_toBottomOf="@+id/profile"
+        app:srcCompat="@drawable/edit_button" />
+
+    <ImageButton
+        android:id="@+id/btn_select"
+        android:layout_width="88dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/List_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/select_bar" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
