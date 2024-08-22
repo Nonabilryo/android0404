@@ -97,7 +97,8 @@
         android:layout_width="match_parent"
         android:layout_height="450dp"
         android:numColumns="2"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view" />
+        app:layout_constraintTop_toBottomOf="@id/btn_select"
+        android:layout_marginTop="10dp"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_view"
@@ -125,12 +126,13 @@
         android:id="@+id/btn_select"
         android:layout_width="88dp"
         android:layout_height="22dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="#00FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/List_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/select_bar" />
+        app:srcCompat="@drawable/select_bar"
+        app:layout_constraintTop_toBottomOf="@id/tv_follower"
+        android:layout_marginTop="30dp"/>
 
 
 
