@@ -15,7 +15,7 @@ data class ArticleResponse(
         @SerializedName("totalPages") val totalPages: Int,
         @SerializedName("number") val number: Int,
         @SerializedName("first") val first: Boolean,
-        @SerializedName("sort") val sort: List<Any>,
+        @SerializedName("sort") val sort: Sort,
         @SerializedName("size") val size: Int,
         @SerializedName("numberOfElements") val numberOfElements: Int,
         @SerializedName("empty") val empty: Boolean
@@ -36,10 +36,16 @@ data class ArticleResponse(
         data class Pageable(
             @SerializedName("pageNumber") val pageNumber: Int,
             @SerializedName("pageSize") val pageSize: Int,
-            @SerializedName("sort") val sort: List<Any>,
+            @SerializedName("sort") val sort: Sort,
             @SerializedName("offset") val offset: Int,
             @SerializedName("paged") val paged: Boolean,
             @SerializedName("unpaged") val unpaged: Boolean
+        )
+
+        data class Sort(
+            @SerializedName("empty") val empty: Boolean,
+            @SerializedName("unsorted") val unsorted: Boolean,
+            @SerializedName("sorted") val sorted: Boolean
         )
     }
 }

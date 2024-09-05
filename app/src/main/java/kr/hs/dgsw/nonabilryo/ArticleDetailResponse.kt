@@ -14,7 +14,8 @@ data class ArticleData(
     val description: String,
     val price: Int,
     val rentalType: String,
-    val createdAt: String
+    val createdAt: String,
+    val like: Int
 )
 
 data class ArticleImage(
