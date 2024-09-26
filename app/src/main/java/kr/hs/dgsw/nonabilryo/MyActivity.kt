@@ -54,6 +54,8 @@ class MyActivity : AppCompatActivity() {
             }
         }
 
+        bottomNavigationView.selectedItemId = R.id.navigation_my
+
         // Fetch user info
         fetchUserInfo("ac183a12-734d-4444-872f-93eaf6c11743")
     }
