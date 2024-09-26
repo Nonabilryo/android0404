@@ -49,7 +49,7 @@ interface RetrofitService {
 }
 
 object RetrofitClient {
-    private const val BASE_URL = "http://10.80.161.246:8080/"
+    private const val BASE_URL = "http://10.80.161.195:8080/"
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
