@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,6 +25,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation_view)
+        val plusButton: FloatingActionButton = findViewById(R.id.plus_btn)
 
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -63,6 +65,10 @@ class HomeActivity : AppCompatActivity() {
 
         // Retrofit 호출
         checkApiResponse()
+
+        plusButton.setOnClickListener {
+            startActivity(Intent(this, GoodsAddActivity::class.java)) // 상품 등록 페이지로 이동
+        }
     }
 
     private fun checkApiResponse() {
