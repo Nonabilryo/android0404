@@ -47,23 +47,21 @@ class GoodsActivity : AppCompatActivity() {
 
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.navigation_home -> {
-                    true
-                }
-                R.id.navigation_community -> {
-                    true
-                }
-                R.id.navigation_chat -> {
-                    true
-                }
-                R.id.navigation_my -> {
-                    true
-                }
+                R.id.navigation_home -> true
+                R.id.navigation_community -> true
+                R.id.navigation_chat -> true
+                R.id.navigation_my -> true
                 else -> false
             }
         }
 
         bottomNavigationView.selectedItemId = R.id.navigation_home
+
+        // Get article ID from Intent extras
+        val articleId = intent.getStringExtra("articleId")
+        if (articleId != null) {
+            fetchArticleDetail(articleId)
+        }
 
         // Retrofit 호출
         fetchArticleDetail("1b585769-3f01-4cb6-ba54-d0c30b95cb1b")
@@ -75,9 +73,8 @@ class GoodsActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ArticleDetailResponse>, response: Response<ArticleDetailResponse>) {
                 if (response.isSuccessful) {
                     val articleDetail = response.body()
-                    if (articleDetail != null) {
+                    if (articleDetail != null && articleDetail.data != null) {
                         Log.d("API 호출 성공", "응답 내용: $articleDetail")
-                        // Update UI with the data
                         updateUI(articleDetail.data)
                     } else {
                         Log.d("API 호출 성공", "응답이 비어 있습니다.")
@@ -131,6 +128,7 @@ class GoodsActivity : AppCompatActivity() {
                 else -> "방금 전"
             }
         } catch (e: ParseException) {
+            Log.e("날짜 형식 오류", e.message ?: "알 수 없는 오류")
             "날짜 형식 오류"
         }
     }

@@ -44,7 +44,6 @@
                 app:layout_constraintEnd_toStartOf="@id/bell_btn"
                 app:layout_constraintTop_toTopOf="@id/bell_btn" />
 
-            <!-- 기타 UI 요소들 -->
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
@@ -69,5 +68,17 @@
         android:layout_marginBottom="0dp"
         android:layout_marginTop="110dp"
         tools:listitem="@layout/item_recycler_view" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="100dp"
+        android:src="@drawable/ic_plus"
+        android:tint="@color/white"
+        app:backgroundTint="@color/green" />
 
 </RelativeLayout>
