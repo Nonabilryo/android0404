@@ -49,11 +49,22 @@ interface RetrofitService {
 }
 
 object RetrofitClient {
+<<<<<<< Updated upstream
     private const val BASE_URL = "http://10.80.161.246:8080/"
+=======
+<<<<<<< Updated upstream
+    private const val BASE_URL = "http://10.80.161.181:8080/"
+=======
+    private const val BASE_URL = "http://10.80.161.195:8080/"
+>>>>>>> Stashed changes
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
     private val okHttpClient: OkHttpClient by lazy {
         val trustAllCertificates = arrayOf<TrustManager>(object : X509TrustManager {
