@@ -9,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 import java.net.CookieManager
@@ -45,11 +46,11 @@ interface RetrofitService {
     fun getArticleById(@Path("articleIdx") articleIdx: String): Call<ArticleDetailResponse>
 
     @GET("user/{userIdx}")
-    fun getUserInfo(@Path("userIdx") userIdx: String): Call<UserResponse>
+    fun getUserInfo(@Path("userIdx") userIdx: String, @Header("Authorization") auth: String?): Call<UserResponse>
 }
 
 object RetrofitClient {
-    private const val BASE_URL = "http://43.202.33.106:8080/"
+    private const val BASE_URL = "http://52.79.55.88:8080/"
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY

@@ -43,6 +43,9 @@
             android:name=".GoodsActivity"
             android:exported="true"></activity>
         <activity
+            android:name=".GoodsAddActivity"
+            android:exported="true"></activity>
+        <activity
             android:name=".CommunityActivity"
             android:exported="true"></activity>
         <activity
