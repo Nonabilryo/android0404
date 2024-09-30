@@ -71,7 +71,7 @@ class SignupActivity : AppCompatActivity() {
             return
         }
 
-        val signupRequest = SignupRequest(name, id, password, address, email, tell, emailVerifyCode, tellVerifyCode)
+        val signupRequest = SignupRequest(name, id, password, email, tell, address, emailVerifyCode, tellVerifyCode)
 
         Log.d("SignupRequest", "Request Data: $signupRequest")
 

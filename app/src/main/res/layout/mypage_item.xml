@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/recycler_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -21,20 +21,20 @@
         android:layout_height="15dp"
         android:layout_marginEnd="45dp"
         android:layout_marginBottom="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
+        app:layout_constraintBottom_toBottomOf="@+id/recycler_layout"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_layout"
         app:srcCompat="@drawable/ic_heart"
         app:tint="#B1B1B1" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/recycler_img"
         android:layout_width="89dp"
         android:layout_height="89dp"
         android:layout_marginTop="-50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintStart_toStartOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="@+id/imageView6"
+        app:layout_constraintBottom_toBottomOf="@+id/recycler_layout"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_layout"
+        app:layout_constraintStart_toStartOf="@+id/recycler_layout"
+        app:layout_constraintTop_toTopOf="@+id/recycler_layout"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
@@ -48,7 +48,7 @@
         android:text="9"
         android:textColor="#B1B1B1"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+        app:layout_constraintBottom_toBottomOf="@+id/recycler_layout"
         app:layout_constraintStart_toEndOf="@+id/imageView7" />
 
     <TextView
@@ -60,9 +60,9 @@
         android:text="빌려드려요"
         android:textColor="#000000"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintStart_toStartOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+        app:layout_constraintEnd_toEndOf="@+id/recycler_layout"
+        app:layout_constraintStart_toStartOf="@+id/recycler_layout"
+        app:layout_constraintTop_toBottomOf="@+id/recycler_img" />
 
     <TextView
         android:id="@+id/textView11"
@@ -71,7 +71,7 @@
         android:fontFamily="@font/pretendard_bold"
         android:text="3000원"
         android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintStart_toStartOf="@+id/imageView6"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_layout"
+        app:layout_constraintStart_toStartOf="@+id/recycler_layout"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,11 +15,9 @@ import retrofit2.Response
 class MyActivity : AppCompatActivity() {
 
     private lateinit var retrofitService: RetrofitService
-
     private lateinit var profileImageView: ImageView
     private lateinit var nameTextView: TextView
     private lateinit var bottomNavigationView: BottomNavigationView
-
     private lateinit var sharedPreferencesManager: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,15 +26,13 @@ class MyActivity : AppCompatActivity() {
 
         sharedPreferencesManager = SharedPreferences(this)
 
-        // Initialize Retrofit service
         retrofitService = RetrofitClient.instance
 
-        // Find views
         profileImageView = findViewById(R.id.profile)
         nameTextView = findViewById(R.id.tv_name)
         bottomNavigationView = findViewById(R.id.bottom_navigation_view)
 
-        // Set up BottomNavigationView
+
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_home -> {
@@ -60,7 +56,7 @@ class MyActivity : AppCompatActivity() {
 
         bottomNavigationView.selectedItemId = R.id.navigation_my
 
-        // Fetch user info
+
         fetchUserInfo("d950d16f-4197-4ac0-b27d-c164c46b4aa5")
         //fetchUserInfo("ac183a12-734d-4444-872f-93eaf6c11743")
     }
