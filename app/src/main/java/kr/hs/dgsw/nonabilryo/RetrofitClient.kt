@@ -91,7 +91,7 @@ object RetrofitClient {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create(gson)) // GsonConverterFactory를 사용하여 JSON 응답을 변환합니다
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
         retrofit.create(RetrofitService::class.java)

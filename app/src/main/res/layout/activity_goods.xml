@@ -157,6 +157,19 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
+    <ImageButton
+        android:id="@+id/heart_btn"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:tint="#000000"
+        app:srcCompat="@drawable/ic_heart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/chat_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="5dp"/>
+
     <android.widget.Button
         android:id="@+id/chat_btn"
         android:layout_width="300dp"
@@ -168,30 +181,8 @@
         android:textSize="16dp"
         android:fontFamily="@font/pretendard_bold"
         app:iconTint="@color/green"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation_view"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/heart_btn"
         android:layout_marginBottom="5dp"/>
-
-    <ImageButton
-        android:id="@+id/heart_btn"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:backgroundTint="#00FFFFFF"
-        android:scaleType="fitCenter"
-        app:tint="#000000"
-        app:srcCompat="@drawable/ic_heart"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation_view"
-        app:layout_constraintEnd_toStartOf="@id/chat_btn"
-        android:layout_marginBottom="5dp"/>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemIconTint="@drawable/menu_color"
-        app:itemTextColor="@drawable/menu_color"
-        app:menu="@menu/bottom_nav_menu"
-        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,76 +38,74 @@ class GoodsActivity : AppCompatActivity() {
         timeTextView = findViewById(R.id.time)
 
         val backButton: ImageButton = findViewById(R.id.back_btn)
-        backButton.setOnClickListener {
-            finish()
-        }
+        backButton.setOnClickListener { finish() }
 
-        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation_view)
-
-        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.navigation_home -> true
-                R.id.navigation_community -> true
-                R.id.navigation_chat -> true
-                R.id.navigation_my -> true
-                else -> false
-            }
-        }
-
-        bottomNavigationView.selectedItemId = R.id.navigation_home
-
-        // Get article ID from Intent extras
-        val articleId = intent.getStringExtra("articleId")
-        if (articleId != null) {
-            fetchArticleDetail(articleId)
-        }
-
-        // Retrofit 호출
-        fetchArticleDetail("1b585769-3f01-4cb6-ba54-d0c30b95cb1b")
+        // articleIdx로 API 호출
+        val articleIdx = "df1f8741-4b26-424c-8f19-f15314c96b7e"
+        Log.d("GoodsActivity", "articleIdx: $articleIdx")
+        fetchArticleDetail(articleIdx)
     }
 
-    private fun fetchArticleDetail(articleId: String) {
-        val call = RetrofitClient.instance.getArticleById(articleId)
+    private fun fetchArticleDetail(articleIdx: String) {
+        Log.d("GoodsActivity", "fetchArticleDetail 호출됨: articleIdx = $articleIdx")
+        val call = RetrofitClient.instance.getArticleById(articleIdx)
         call.enqueue(object : Callback<ArticleDetailResponse> {
             override fun onResponse(call: Call<ArticleDetailResponse>, response: Response<ArticleDetailResponse>) {
                 if (response.isSuccessful) {
                     val articleDetail = response.body()
+                    Log.d("GoodsActivity", "API 호출 성공: 응답 코드 = ${response.code()}")
+
                     if (articleDetail != null && articleDetail.data != null) {
-                        Log.d("API 호출 성공", "응답 내용: $articleDetail")
+                        Log.d("GoodsActivity", "API 데이터 수신 성공: ${articleDetail.data}")
                         updateUI(articleDetail.data)
                     } else {
-                        Log.d("API 호출 성공", "응답이 비어 있습니다.")
+                        Log.d("GoodsActivity", "API 응답은 성공했으나 데이터가 비어 있음")
                     }
                 } else {
-                    Log.d("API 호출 실패", "${response.code()} - ${response.message()}")
+                    Log.d("GoodsActivity", "API 호출 실패: 응답 코드 = ${response.code()}, 메시지 = ${response.message()}")
                     response.errorBody()?.let {
-                        Log.d("API 호출 실패", "오류 본문: ${it.string()}")
+                        Log.d("GoodsActivity", "API 호출 실패: 오류 본문 = ${it.string()}")
                     }
                 }
             }
 
             override fun onFailure(call: Call<ArticleDetailResponse>, t: Throwable) {
-                Log.d("API 호출 오류", t.message ?: "알 수 없는 오류")
+                Log.d("GoodsActivity", "API 호출 오류: ${t.message}")
             }
         })
     }
 
     private fun updateUI(articleData: ArticleData) {
+        Log.d("GoodsActivity", "UI 업데이트 시작")
         goodsTitleTextView.text = articleData.title
-        writerTextView.text = articleData.writer
+
+        val writerName = extractNameFromWriter(articleData.writer)
+        writerTextView.text = writerName
+
         priceTextView.text = "${articleData.price}원"
         descriptionTextView.text = articleData.description
         categoryTextView.text = articleData.category
         timeTextView.text = getRelativeTime(articleData.createdAt)
 
         if (articleData.images.isNotEmpty()) {
+            Log.d("GoodsActivity", "이미지 로드 중: ${articleData.images[0].url}")
             Glide.with(this)
                 .load(articleData.images[0].url)
                 .into(goodsImageView)
+        } else {
+            Log.d("GoodsActivity", "이미지가 없습니다.")
         }
+        Log.d("GoodsActivity", "UI 업데이트 완료")
+    }
+
+    private fun extractNameFromWriter(writer: String): String {
+        val regex = Regex("name=(.*?),")
+        val matchResult = regex.find(writer)
+        return matchResult?.groups?.get(1)?.value ?: "작성자 없음"
     }
 
     private fun getRelativeTime(createdAt: String): String {
+        Log.d("GoodsActivity", "getRelativeTime 호출됨: createdAt = $createdAt")
         val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault())
         return try {
             val createdAtDate = formatter.parse(createdAt)
@@ -128,7 +125,7 @@ class GoodsActivity : AppCompatActivity() {
                 else -> "방금 전"
             }
         } catch (e: ParseException) {
-            Log.e("날짜 형식 오류", e.message ?: "알 수 없는 오류")
+            Log.e("GoodsActivity", "날짜 형식 오류: ${e.message}")
             "날짜 형식 오류"
         }
     }
