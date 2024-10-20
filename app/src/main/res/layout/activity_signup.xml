@@ -241,6 +241,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="10dp"/>
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/email_verification_confirm_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="10dp"
+                android:text="인증 확인"
+                android:textColor="@color/gray"
+                android:background="@android:color/transparent"
+                android:onClick="onEmailVerificationConfirmButtonClick" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -314,6 +326,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="10dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/tell_verification_confirm_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="10dp"
+                android:text="인증 확인"
+                android:textColor="@color/gray"
+                android:background="@android:color/transparent"
+                android:onClick="onTellVerificationConfirmButtonClick"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

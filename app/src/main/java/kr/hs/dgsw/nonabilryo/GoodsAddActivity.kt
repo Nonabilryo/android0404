@@ -68,6 +68,11 @@ class GoodsAddActivity : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         rentalTypeSpinner.adapter = adapter
 
+        val backBtn: ImageButton = findViewById(R.id.back_btn)
+        backBtn.setOnClickListener {
+            navigateToHome() // 홈 화면으로 이동
+        }
+
         // 카메라 버튼 클릭 이벤트
         cameraButton.setOnClickListener {
             dispatchTakePictureIntent()

@@ -25,14 +25,25 @@ import javax.net.ssl.X509TrustManager
 
 interface RetrofitService {
     @POST("sso/sign-up")
-    fun signup(
-        @Body signupRequest: SignupRequest
-    ): Call<SignupResponse>
+    fun signUp(@Body signUpRequest: SignUpRequest): Call<SignupResponse>
+
+    @POST("sso/verify/name")
+    fun verifyName(@Body nameVerifyRequest: NameVerifyRequest): Call<SignupResponse>
+
+    @POST("sso/verify/email")
+    fun verifyEmail(@Body emailRequest: EmailRequest): Call<SignupResponse>
+
+    @POST("sso/verify/emailCode")
+    fun verifyEmailCode(@Body emailVerifyCode: EmailVerifyCodeRequest): Call<SignupResponse>
+
+    @POST("sso/verify/tell")
+    fun verifyTell(@Body tellRequest: TellRequest): Call<SignupResponse>
+
+    @POST("sso/verify/tellCode")
+    fun verifyTellCode(@Body tellVerifyCode: TellVerifyCodeRequest): Call<SignupResponse>
 
     @POST("sso/login")
-    fun login(
-        @Body loginRequest: LoginRequest
-    ): Call<LoginResponse>
+    fun login(@Body loginRequest: LoginRequest): Call<LoginResponse>
 
     @POST("sso/verify/email")
     fun sendEmailVerificationCode(@Body email: EmailRequest): Call<SignupResponse>
