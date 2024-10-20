@@ -17,7 +17,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var idEdit: EditText
     private lateinit var pwEdit: EditText
-    private lateinit var sharedPreferencesManager: SharedPreferences
+    private lateinit var sharedPreferencesManager: SharedPreferencesManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
 
         idEdit = findViewById(R.id.id_edit)
         pwEdit = findViewById(R.id.pw_edit)
-        sharedPreferencesManager = SharedPreferences(this)
+        sharedPreferencesManager = SharedPreferencesManager(this)
 
         val loginBtn: AppCompatButton = findViewById(R.id.login_btn)
         loginBtn.setOnClickListener {

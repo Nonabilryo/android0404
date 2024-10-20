@@ -18,13 +18,13 @@ class MyActivity : AppCompatActivity() {
     private lateinit var profileImageView: ImageView
     private lateinit var nameTextView: TextView
     private lateinit var bottomNavigationView: BottomNavigationView
-    private lateinit var sharedPreferencesManager: SharedPreferences
+    private lateinit var sharedPreferencesManager: SharedPreferencesManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my)
 
-        sharedPreferencesManager = SharedPreferences(this)
+        sharedPreferencesManager = SharedPreferencesManager(this)
 
         retrofitService = RetrofitClient.instance
 

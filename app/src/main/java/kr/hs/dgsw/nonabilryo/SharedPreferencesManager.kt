@@ -3,7 +3,7 @@ package kr.hs.dgsw.nonabilryo
 import android.content.Context
 import android.content.SharedPreferences
 
-class SharedPreferences(context: Context) {
+class SharedPreferencesManager(context: Context) {
 
     private val PREFS_FILENAME = "kr.hs.dgsw.nonabilryo.prefs"
     private val PREF_ACCESS_TOKEN = "accessToken"

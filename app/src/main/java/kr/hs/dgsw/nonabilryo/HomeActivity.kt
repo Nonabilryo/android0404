@@ -19,6 +19,7 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ArticleAdapter
+    private var articles: MutableList<ArticleResponse.Data.Article> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +53,7 @@ class HomeActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ArticleAdapter(listOf()) { article ->
+        adapter = ArticleAdapter(articles) { article ->
             val intent = Intent(this, GoodsActivity::class.java)
             intent.putExtra("ARTICLE_TITLE", article.title)
             intent.putExtra("ARTICLE_PRICE", article.price)
@@ -80,8 +81,7 @@ class HomeActivity : AppCompatActivity() {
                     val articleResponse = response.body()
                     if (articleResponse != null) {
                         println("API 호출 성공: $articleResponse")
-                        // 어댑터에 데이터 업데이트
-                        adapter.updateArticles(articleResponse.data.content)
+                        updateArticles(articleResponse.data.content)
                     } else {
                         println("응답이 비어 있습니다.")
                     }
@@ -96,6 +96,13 @@ class HomeActivity : AppCompatActivity() {
                 println("API 호출 오류: ${t.message}")
             }
         })
+    }
+
+    private fun updateArticles(newArticles: List<ArticleResponse.Data.Article>) {
+        // 기존 데이터를 업데이트
+        articles.clear()
+        articles.addAll(newArticles)
+        adapter.notifyDataSetChanged()
     }
 
     private fun getTimeAgo(dateString: String): String {

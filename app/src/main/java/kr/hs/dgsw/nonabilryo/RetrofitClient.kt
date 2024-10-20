@@ -2,7 +2,9 @@ package kr.hs.dgsw.nonabilryo
 
 import com.google.gson.GsonBuilder
 import okhttp3.JavaNetCookieJar
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -10,7 +12,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Path
 import java.net.CookieManager
 import java.security.cert.X509Certificate
@@ -47,6 +51,18 @@ interface RetrofitService {
 
     @GET("user/{userIdx}")
     fun getUserInfo(@Path("userIdx") userIdx: String, @Header("Authorization") auth: String?): Call<UserResponse>
+
+    @Multipart
+    @POST("/article")
+    fun postArticle(
+        @Part("title") title: RequestBody,
+        @Part("category") category: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("price") price: RequestBody,
+        @Part("rentalType") rentalType: RequestBody,
+        @Part images: List<MultipartBody.Part>,
+        @Header("Authorization") token: String?
+    ): Call<ApiResponse>
 }
 
 object RetrofitClient {
@@ -74,12 +90,6 @@ object RetrofitClient {
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
-            .addInterceptor { chain ->
-                val request = chain.request().newBuilder()
-                    .addHeader("Content-Type", "application/json")
-                    .build()
-                chain.proceed(request)
-            }
             .build()
     }
 

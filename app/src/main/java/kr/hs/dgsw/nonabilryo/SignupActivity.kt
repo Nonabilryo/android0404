@@ -22,7 +22,7 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var addressEdit: EditText
     private lateinit var emailVerificationEdit: EditText
     private lateinit var tellVerificationEdit: EditText
-    private lateinit var sharedPreferencesManager: SharedPreferences
+    private lateinit var sharedPreferencesManager: SharedPreferencesManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,7 @@ class SignupActivity : AppCompatActivity() {
         addressEdit = findViewById(R.id.adress_edit)
         emailVerificationEdit = findViewById(R.id.email_verification_edit)
         tellVerificationEdit = findViewById(R.id.tell_verification_edit)
-        sharedPreferencesManager = SharedPreferences(this)
+        sharedPreferencesManager = SharedPreferencesManager(this)
 
         val backBtn: ImageButton = findViewById(R.id.back_btn)
         backBtn.setOnClickListener {

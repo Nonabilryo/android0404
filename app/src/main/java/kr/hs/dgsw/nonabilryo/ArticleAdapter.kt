@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 
 class ArticleAdapter(
-    private var articles: List<ArticleResponse.Data.Article>,
+    private var articles: MutableList<ArticleResponse.Data.Article>,
     private val onItemClick: (ArticleResponse.Data.Article) -> Unit
 ) : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
 
@@ -31,8 +31,23 @@ class ArticleAdapter(
     }
 
     fun updateArticles(newArticles: List<ArticleResponse.Data.Article>) {
-        articles = newArticles
-        notifyDataSetChanged()
+        val oldArticles = articles.toMutableList()
+        articles.clear()
+        articles.addAll(newArticles)
+
+        // 추가된 항목 업데이트
+        for (i in newArticles.indices) {
+            if (i >= oldArticles.size || oldArticles[i] != newArticles[i]) {
+                notifyItemInserted(i)
+            }
+        }
+
+        // 삭제된 항목 업데이트
+        for (i in oldArticles.indices) {
+            if (i >= newArticles.size || oldArticles[i] != newArticles[i]) {
+                notifyItemRemoved(i)
+            }
+        }
     }
 
     inner class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -42,11 +57,16 @@ class ArticleAdapter(
         private val timeTextView: TextView = itemView.findViewById(R.id.recycler_time)
 
         fun bind(article: ArticleResponse.Data.Article) {
-            titleTextView.text = article.title
+            // 제목을 15글자 미만으로 설정
+            titleTextView.text = if (article.title.length > 15) {
+                article.title.substring(0, 15) + "..."
+            } else {
+                article.title
+            }
             priceTextView.text = "${article.price}원"
             timeTextView.text = getTimeAgo(article.createdAt)
 
-            // 예시 이미지 로드 (Glide 사용 권장)
+            // 이미지 로드
             Glide.with(itemView).load(article.image.url).into(imageView)
 
             itemView.setOnClickListener {

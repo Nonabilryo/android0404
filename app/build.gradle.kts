@@ -47,6 +47,12 @@ android {
 }
 
 dependencies {
+    // Camera
+    implementation("androidx.camera:camera-core:1.1.0")
+    implementation("androidx.camera:camera-camera2:1.1.0")
+    implementation("androidx.camera:camera-lifecycle:1.1.0")
+    implementation("androidx.camera:camera-view:1.0.0-alpha31")
+
     implementation("com.jakewharton.threetenabp:threetenabp:1.3.1")
     implementation("com.squareup.okhttp3:okhttp-urlconnection:4.9.1")
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3")
