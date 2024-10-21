@@ -68,10 +68,8 @@ class GoodsAddActivity : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         rentalTypeSpinner.adapter = adapter
 
-        val backBtn: ImageButton = findViewById(R.id.back_btn)
-        backBtn.setOnClickListener {
-            navigateToHome() // 홈 화면으로 이동
-        }
+        val backButton: ImageButton = findViewById(R.id.back_btn)
+        backButton.setOnClickListener { finish() }
 
         // 카메라 버튼 클릭 이벤트
         cameraButton.setOnClickListener {
@@ -188,7 +186,7 @@ class GoodsAddActivity : AppCompatActivity() {
 
     // 홈 화면으로 이동
     private fun navigateToHome() {
-        val intent = Intent(this, HomeActivity::class.java) // HomeActivity는 실제 홈 화면 액티비티 이름으로 변경
+        val intent = Intent(this, HomeFragment::class.java)
         startActivity(intent)
         finish() // 현재 액티비티 종료
     }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import retrofit2.Call
@@ -28,6 +29,9 @@ class SignupActivity : AppCompatActivity() {
         passwordEdit = findViewById(R.id.pw_edit)
         emailVerificationEdit = findViewById(R.id.email_verification_edit)
         tellVerificationEdit = findViewById(R.id.tell_verification_edit)
+
+        val backButton: ImageButton = findViewById(R.id.back_btn)
+        backButton.setOnClickListener { finish() }
     }
 
     fun onNameVerifyButtonClick(view: View) {

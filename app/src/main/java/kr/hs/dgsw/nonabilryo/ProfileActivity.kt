@@ -1,6 +1,7 @@
 package kr.hs.dgsw.nonabilryo
 
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,5 +17,8 @@ class ProfileActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val backButton: ImageButton = findViewById(R.id.back_btn)
+        backButton.setOnClickListener { finish() }
     }
 }

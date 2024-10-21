@@ -3,62 +3,57 @@ package kr.hs.dgsw.nonabilryo
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MyActivity : AppCompatActivity() {
+class MyFragment : Fragment() {
 
     private lateinit var retrofitService: RetrofitService
     private lateinit var profileImageView: ImageView
     private lateinit var nameTextView: TextView
-    private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var recyclerView: RecyclerView
     private lateinit var sharedPreferencesManager: SharedPreferencesManager
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_my, container, false)
 
-        sharedPreferencesManager = SharedPreferencesManager(this)
+        sharedPreferencesManager = SharedPreferencesManager(requireContext())
 
         retrofitService = RetrofitClient.instance
 
-        profileImageView = findViewById(R.id.profile)
-        nameTextView = findViewById(R.id.tv_name)
-        bottomNavigationView = findViewById(R.id.bottom_navigation_view)
+        profileImageView = view.findViewById(R.id.profile)
+        nameTextView = view.findViewById(R.id.tv_name)
+        recyclerView = view.findViewById(R.id.recycler_view)
 
+        // RecyclerView 설정
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        // Adapter 설정 (Adapter 클래스는 필요에 따라 생성해 주세요)
+        // recyclerView.adapter = YourAdapterClass()
 
-        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.navigation_home -> {
-                    startActivity(Intent(this, HomeActivity::class.java))
-                    true
-                }
-                R.id.navigation_community -> {
-                    startActivity(Intent(this, CommunityActivity::class.java))
-                    true
-                }
-                R.id.navigation_chat -> {
-                    startActivity(Intent(this, ChatActivity::class.java))
-                    true
-                }
-                R.id.navigation_my -> {
-                    true
-                }
-                else -> false
-            }
+        // 프로필 수정 클릭 리스너 설정
+        val btnEdit: ImageButton = view.findViewById(R.id.btn_edit)
+        btnEdit.setOnClickListener {
+            val intent = Intent(requireContext(), ProfileActivity::class.java)
+            startActivity(intent)
         }
 
-        bottomNavigationView.selectedItemId = R.id.navigation_my
-
-
         fetchUserInfo("d950d16f-4197-4ac0-b27d-c164c46b4aa5")
-        //fetchUserInfo("ac183a12-734d-4444-872f-93eaf6c11743")
+
+        return view
     }
 
     private fun fetchUserInfo(userIdx: String) {
@@ -73,11 +68,10 @@ class MyActivity : AppCompatActivity() {
                             Log.d("UserResponse", "loginResponse: $loginResponse")
 
                             // 서버로부터 온 원시 응답을 로그로 출력
-                            val rawResponse = response.body()
                             val rawResponseString = response.errorBody()?.string()
                             Log.d("UserResponse", "Raw Response String: $rawResponseString")
 
-                            rawResponse?.let { userResponse ->
+                            loginResponse?.let { userResponse ->
                                 Log.d("UserResponse", "Parsed Response Body: ${Gson().toJson(userResponse)}")
                                 nameTextView.text = userResponse.data.name
                                 userResponse.data.imageUrl?.let { imageUrl ->

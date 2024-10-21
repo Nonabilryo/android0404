@@ -44,11 +44,8 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, SignupActivity::class.java))
         }
 
-        val backBtn: ImageButton = findViewById(R.id.back_btn)
-        backBtn.setOnClickListener {
-            // 뒤로 가기 동작
-            onBackPressed()
-        }
+        val backButton: ImageButton = findViewById(R.id.back_btn)
+        backButton.setOnClickListener { finish() }
     }
 
     // 뒤로가기 버튼 클릭 시 호출될 메서드
@@ -84,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
     private fun navigateToHome() {
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
-        finish() // LoginActivity 종료
+        finish()
     }
 
     private fun showToast(message: String) {
