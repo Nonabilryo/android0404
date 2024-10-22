@@ -58,7 +58,10 @@ class GoodsAddActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recycler_view)
         imageAdapter = ImageAdapter(imagePaths)
         recyclerView.adapter = imageAdapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        // 이미지 가로 방향으로 스크롤
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
 
         // 숫자 배열 생성
         val rentalTypes = arrayOf(0, 1, 2, 3)
