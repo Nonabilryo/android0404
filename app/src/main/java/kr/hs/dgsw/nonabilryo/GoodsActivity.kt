@@ -24,6 +24,9 @@ class GoodsActivity : AppCompatActivity() {
     private lateinit var descriptionTextView: TextView
     private lateinit var categoryTextView: TextView
     private lateinit var timeTextView: TextView
+    private lateinit var rentalTypeTextView: TextView
+    private lateinit var heartButton: ImageButton
+    private var isHearted = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +39,8 @@ class GoodsActivity : AppCompatActivity() {
         descriptionTextView = findViewById(R.id.description)
         categoryTextView = findViewById(R.id.category)
         timeTextView = findViewById(R.id.time)
+        rentalTypeTextView = findViewById(R.id.rental_type)
+        heartButton = findViewById(R.id.heart_btn)
 
         val backButton: ImageButton = findViewById(R.id.back_btn)
         backButton.setOnClickListener { finish() }
@@ -44,6 +49,11 @@ class GoodsActivity : AppCompatActivity() {
         val articleIdx = "df1f8741-4b26-424c-8f19-f15314c96b7e"
         Log.d("GoodsActivity", "articleIdx: $articleIdx")
         fetchArticleDetail(articleIdx)
+
+        // 하트 버튼 클릭 리스너 설정
+        heartButton.setOnClickListener {
+            toggleHeart()
+        }
     }
 
     private fun fetchArticleDetail(articleIdx: String) {
@@ -87,6 +97,8 @@ class GoodsActivity : AppCompatActivity() {
         categoryTextView.text = articleData.category
         timeTextView.text = getRelativeTime(articleData.createdAt)
 
+        rentalTypeTextView.text = articleData.rentalType
+
         if (articleData.images.isNotEmpty()) {
             Log.d("GoodsActivity", "이미지 로드 중: ${articleData.images[0].url}")
             Glide.with(this)
@@ -127,6 +139,18 @@ class GoodsActivity : AppCompatActivity() {
         } catch (e: ParseException) {
             Log.e("GoodsActivity", "날짜 형식 오류: ${e.message}")
             "날짜 형식 오류"
+        }
+    }
+
+    private fun toggleHeart() {
+        isHearted = !isHearted // 하트 상태 토글
+
+        if (isHearted) {
+            heartButton.setImageResource(R.drawable.ic_red_heart) // 빨간 하트 이미지
+            heartButton.setColorFilter(getColor(R.color.red)) // 빨간색 필터
+        } else {
+            heartButton.setImageResource(R.drawable.ic_heart) // 원래 하트 이미지
+            heartButton.clearColorFilter() // 필터 제거
         }
     }
 }
