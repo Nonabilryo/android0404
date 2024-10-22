@@ -73,13 +73,14 @@ class GoodsAddActivity : AppCompatActivity() {
 
         // 카메라 버튼 클릭 이벤트
         cameraButton.setOnClickListener {
+            checkCameraPermission()
             dispatchTakePictureIntent()
         }
 
         // 등록 버튼 클릭 이벤트
         val registerButton: Button = findViewById(R.id.button)
         registerButton.setOnClickListener {
-            val rentalType = rentalTypeSpinner.selectedItem as Int // 선택된 값 가져오기
+            val rentalType = rentalTypeSpinner.selectedItem as Int
 
             // Retrofit POST 요청 보내기
             val token: String? = sharedPreferencesManager.getAccessToken()
@@ -93,7 +94,7 @@ class GoodsAddActivity : AppCompatActivity() {
             val imageParts = imagePaths.map { imagePath ->
                 val file = File(imagePath)
                 val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), file)
-                MultipartBody.Part.createFormData("images[]", file.name, requestFile)
+                MultipartBody.Part.createFormData("images", file.name, requestFile)
             }
 
             if (token != null) {
@@ -103,7 +104,7 @@ class GoodsAddActivity : AppCompatActivity() {
                     descriptionBody,
                     priceBody,
                     rentalTypeBody,
-                    imageParts, // MultipartBody.Part 리스트 전달
+                    imageParts,
                     token
                 ).enqueue(object : Callback<ApiResponse> {
                     override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {

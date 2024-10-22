@@ -74,7 +74,7 @@
         android:layout_marginTop="18dp"
         android:text="followers 0"
         android:textColor="#A3A0A0"
-        android:textSize="17sp"
+        android:textSize="17dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
@@ -82,12 +82,13 @@
         android:id="@+id/tv_following"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
+        android:layout_marginEnd="110dp"
         android:layout_marginTop="18dp"
         android:text="following 0"
         android:textColor="#A3A0A0"
-        android:textSize="17sp"
+        android:textSize="17dp"
         app:layout_constraintStart_toEndOf="@+id/tv_follower"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
     <androidx.recyclerview.widget.RecyclerView
