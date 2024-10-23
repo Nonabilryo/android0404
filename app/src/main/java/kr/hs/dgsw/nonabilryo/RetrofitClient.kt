@@ -63,6 +63,9 @@ interface RetrofitService {
     @GET("user/{userIdx}")
     fun getUserInfo(@Path("userIdx") userIdx: String, @Header("Authorization") auth: String?): Call<UserResponse>
 
+    @GET("article/user/{userIdx}/{page}")
+    fun getUserProducts(@Path("userIdx") userIdx: String, @Path("page") page: Int, @Header("Authorization") auth: String?): Call<ProductResponse>
+
     @Multipart
     @POST("/article")
     fun postArticle(

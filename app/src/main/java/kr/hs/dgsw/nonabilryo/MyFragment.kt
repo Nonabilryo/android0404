@@ -10,7 +10,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import retrofit2.Call
@@ -24,6 +24,7 @@ class MyFragment : Fragment() {
     private lateinit var nameTextView: TextView
     private lateinit var recyclerView: RecyclerView
     private lateinit var sharedPreferencesManager: SharedPreferencesManager
+    private lateinit var productAdapter: ProductAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,9 +41,7 @@ class MyFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recycler_view)
 
         // RecyclerView 설정
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        // Adapter 설정 (Adapter 클래스는 필요에 따라 생성해 주세요)
-        // recyclerView.adapter = YourAdapterClass()
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         // 프로필 수정 클릭 리스너 설정
         val btnEdit: ImageButton = view.findViewById(R.id.btn_edit)
@@ -77,6 +76,9 @@ class MyFragment : Fragment() {
                                 userResponse.data.imageUrl?.let { imageUrl ->
                                     // Glide.with(this).load(imageUrl).into(profileImageView)
                                 }
+
+                                // 사용자 제품 정보를 가져오기 위한 메소드 호출
+                                fetchUserProducts(userIdx) // 여기에 userIdx를 전달
                             } ?: run {
                                 Log.e("UserResponse", "Response body is null")
                             }
@@ -92,6 +94,43 @@ class MyFragment : Fragment() {
 
                 override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                     Log.e("UserResponse", "Network Error: ${t.localizedMessage}", t)
+                }
+            })
+    }
+
+    private fun fetchUserProducts(userIdx: String) {
+        val token: String? = sharedPreferencesManager.getAccessToken()
+        val page = 0
+        retrofitService.getUserProducts(userIdx, page, token)
+            .enqueue(object : Callback<ProductResponse> {
+                override fun onResponse(call: Call<ProductResponse>, response: Response<ProductResponse>) {
+                    if (response.isSuccessful) {
+                        val productResponse = response.body()
+                        productResponse?.let {
+                            // ProductItem 리스트를 Product 리스트로 변환
+                            val productList = it.data.content.map { productItem ->
+                                Product(
+                                    idx = productItem.idx,
+                                    title = productItem.title,
+                                    price = productItem.price,
+                                    rentalType = productItem.rentalType,
+                                    image = Image(
+                                        url = productItem.image.url,
+                                        idx = productItem.image.idx
+                                    )
+                                )
+                            }
+
+                            productAdapter = ProductAdapter(productList) // 어댑터 초기화
+                            recyclerView.adapter = productAdapter // RecyclerView에 어댑터 설정
+                        } ?: Log.e("ProductResponse", "Response body is null")
+                    } else {
+                        Log.e("ProductResponse", "Response Error: ${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<ProductResponse>, t: Throwable) {
+                    Log.e("ProductResponse", "Network Error: ${t.localizedMessage}", t)
                 }
             })
     }

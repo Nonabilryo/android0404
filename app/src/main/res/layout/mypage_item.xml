@@ -16,18 +16,7 @@
         app:srcCompat="@drawable/my_rectangle" />
 
     <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="17dp"
-        android:layout_height="15dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/recycler_layout"
-        app:layout_constraintEnd_toEndOf="@+id/recycler_layout"
-        app:srcCompat="@drawable/ic_heart"
-        app:tint="#B1B1B1" />
-
-    <ImageView
-        android:id="@+id/recycler_img"
+        android:id="@+id/product_image"
         android:layout_width="89dp"
         android:layout_height="89dp"
         android:layout_marginTop="-50dp"
@@ -38,21 +27,7 @@
         app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
-        android:id="@+id/textView9"
-        android:layout_width="16dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="25dp"
-        android:fontFamily="@font/pretendard_bold"
-        android:gravity="center"
-        android:text="9"
-        android:textColor="#B1B1B1"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/recycler_layout"
-        app:layout_constraintStart_toEndOf="@+id/imageView7" />
-
-    <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/product_title"
         android:layout_width="121dp"
         android:layout_height="23dp"
         android:layout_marginTop="7dp"
@@ -62,10 +37,10 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/recycler_layout"
         app:layout_constraintStart_toStartOf="@+id/recycler_layout"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_img" />
+        app:layout_constraintTop_toBottomOf="@+id/product_image" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/product_price"
         android:layout_width="121dp"
         android:layout_height="18dp"
         android:fontFamily="@font/pretendard_bold"
@@ -73,5 +48,5 @@
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="@+id/recycler_layout"
         app:layout_constraintStart_toStartOf="@+id/recycler_layout"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/product_title" />
 </androidx.constraintlayout.widget.ConstraintLayout>

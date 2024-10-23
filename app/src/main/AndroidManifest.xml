@@ -48,6 +48,9 @@
             android:exported="true"
             android:requestLegacyExternalStorage="true" />
         <activity
+            android:name=".MessageActivity"
+            android:exported="true" />
+        <activity
             android:name=".IdFindActivity"
             android:exported="true" />
         <activity

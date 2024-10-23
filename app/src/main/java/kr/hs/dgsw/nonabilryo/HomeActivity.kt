@@ -13,7 +13,6 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener { menuItem ->
             val selectedFragment = when (menuItem.itemId) {
                 R.id.navigation_home -> HomeFragment()
-                R.id.navigation_community -> CommunityFragment()
                 R.id.navigation_chat -> ChatFragment()
                 R.id.navigation_my -> MyFragment()
                 else -> null
