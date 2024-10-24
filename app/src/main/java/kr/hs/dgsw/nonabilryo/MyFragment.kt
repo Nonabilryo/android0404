@@ -121,7 +121,14 @@ class MyFragment : Fragment() {
                                 )
                             }
 
-                            productAdapter = ProductAdapter(productList) // 어댑터 초기화
+                            // 클릭 리스너 설정
+                            productAdapter = ProductAdapter(productList) { productId ->
+                                // 상품 클릭 시의 동작 정의
+                                val intent = Intent(requireContext(), GoodsActivity::class.java)
+                                intent.putExtra("PRODUCT_ID", productId)
+                                startActivity(intent)
+                            }
+
                             recyclerView.adapter = productAdapter // RecyclerView에 어댑터 설정
                         } ?: Log.e("ProductResponse", "Response body is null")
                     } else {

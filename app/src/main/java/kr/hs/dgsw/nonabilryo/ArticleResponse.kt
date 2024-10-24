@@ -21,6 +21,7 @@ data class ArticleResponse(
         @SerializedName("empty") val empty: Boolean
     ) {
         data class Article(
+            @SerializedName("idx") val id: String,
             @SerializedName("title") val title: String,
             @SerializedName("price") val price: Long,
             @SerializedName("rentalType") val rentalType: String,

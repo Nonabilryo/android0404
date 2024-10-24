@@ -34,6 +34,7 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(activity)
         adapter = ArticleAdapter(articles) { article ->
             val intent = Intent(activity, GoodsActivity::class.java)
+            intent.putExtra("ARTICLE_ID", article.id)
             intent.putExtra("ARTICLE_TITLE", article.title)
             intent.putExtra("ARTICLE_PRICE", article.price)
             intent.putExtra("ARTICLE_RENTAL_TYPE", article.rentalType)

@@ -49,8 +49,8 @@ class GoodsActivity : AppCompatActivity() {
         val backButton: ImageButton = findViewById(R.id.back_btn)
         backButton.setOnClickListener { finish() }
 
-        // articleIdx로 API 호출
-        val articleIdx = "df1f8741-4b26-424c-8f19-f15314c96b7e"
+        // articleIdx로 API 호출, 비어있을 경우 기본값 사용
+        val articleIdx = intent.getStringExtra("ARTICLE_ID") ?: "df1f8741-4b26-424c-8f19-f15314c96b7e"
         Log.d("GoodsActivity", "articleIdx: $articleIdx")
         fetchArticleDetail(articleIdx)
 
